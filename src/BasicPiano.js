@@ -4,6 +4,7 @@ import { Piano, KeyboardShortcuts } from 'react-piano';
 import 'react-piano/dist/styles.css';
 import SoundfontProvider from './SoundfontProvider';
 
+
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
@@ -33,7 +34,8 @@ class BasicPiano extends React.Component {
                 render={({ isLoading, playNote, stopNote }) => (
                     <Piano
                         noteRange={this.props.noteRange}
-                        width={500}
+                        // TODO: make responsive resize for mobile
+                        width={window.innerWidth * 0.8}
                         playNote={playNote}
                         stopNote={stopNote}
                         disabled={isLoading}

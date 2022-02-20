@@ -57,43 +57,50 @@ class SoundfontProvider extends React.Component {
   };
 
   playNote = midiNumber => {
+    // this.setState({
+    //   activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
+    //     [midiNumber]: audioNode,
+    //   }),
+    // });
     this.props.audioContext.resume().then(() => {
       const audioNode = this.state.instrument.play(midiNumber);
-      this.setState({
-        activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
-          [midiNumber]: audioNode,
-        }),
-      });
+      // this.setState({
+      //   activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
+      //     [midiNumber]: audioNode,
+      //   }),
+      // });
+      this.props.setCorrectNotes(this.props.correctNotes.concat([midiNumber]))
+      console.log(this.props.correctNotes);
     });
   };
 
   stopNote = midiNumber => {
     this.props.audioContext.resume().then(() => {
-      if (!this.state.activeAudioNodes[midiNumber]) {
-        return;
-      }
-      const audioNode = this.state.activeAudioNodes[midiNumber];
-      audioNode.stop();
-      this.setState({
-        activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
-          [midiNumber]: null,
-        }),
-      });
+      // if (!this.state.activeAudioNodes[midiNumber]) {
+      //   return;
+      // }
+      // const audioNode = this.state.activeAudioNodes[midiNumber];
+      // audioNode.stop();
+      // this.setState({
+      //   activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
+      //     [midiNumber]: null,
+      //   }),
+      // });
     });
   };
 
   // Clear any residual notes that don't get called with stopNote
   stopAllNotes = () => {
     this.props.audioContext.resume().then(() => {
-      const activeAudioNodes = Object.values(this.state.activeAudioNodes);
-      activeAudioNodes.forEach(node => {
-        if (node) {
-          node.stop();
-        }
-      });
-      this.setState({
-        activeAudioNodes: {},
-      });
+      // const activeAudioNodes = Object.values(this.state.activeAudioNodes);
+      // activeAudioNodes.forEach(node => {
+      //   if (node) {
+      //     node.stop();
+      //   }
+      // });
+      // this.setState({
+      //   activeAudioNodes: {},
+      // });
     });
   };
 

@@ -5,6 +5,7 @@ import { MidiNumbers } from 'react-piano';
 // import SoundfontProvider from './SoundfontProvider';
 import BasicPiano from './BasicPiano';
 import './styles.css';
+import {useState} from 'react';
 
 // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 // const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
@@ -18,6 +19,10 @@ function App() {
     first: MidiNumbers.fromNote('c4'),
     last: MidiNumbers.fromNote('b4'),
   };
+
+  const [absentNotes, setAbsentNotes] = useState([]);
+  const [presentNotes, setPresentNotes] = useState([]);
+  const [correctNotes, setCorrectNotes] = useState([]);
 
   return (
     <div className="App">
@@ -35,8 +40,24 @@ function App() {
           Learn React
         </a>
         <div>
-          <BasicPiano noteRange={noteRange4} />
-          <BasicPiano noteRange={noteRange3} />
+          <BasicPiano
+            noteRange={noteRange4}
+            absentNotes={absentNotes}
+            presentNotes={presentNotes}
+            correctNotes={correctNotes}
+            setAbsentNotes={setAbsentNotes}
+            setPresentNotes={setPresentNotes}
+            setCorrectNotes={setCorrectNotes}
+          />
+          <BasicPiano
+            noteRange={noteRange3}
+            absentNotes={absentNotes}
+            presentNotes={presentNotes}
+            correctNotes={correctNotes}
+            setAbsentNotes={setAbsentNotes}
+            setPresentNotes={setPresentNotes}
+            setCorrectNotes={setCorrectNotes}
+          />
         </div>
       </header>
     </div>

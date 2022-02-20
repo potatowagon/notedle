@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/notedle/static/css/main.073c9b0a.css",
+    "main.js": "/notedle/static/js/main.eff8adf7.js",
+    "static/js/787.373f9978.chunk.js": "/notedle/static/js/787.373f9978.chunk.js",
+    "static/media/logo.svg": "/notedle/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/notedle/index.html",
+    "main.073c9b0a.css.map": "/notedle/static/css/main.073c9b0a.css.map",
+    "main.eff8adf7.js.map": "/notedle/static/js/main.eff8adf7.js.map",
+    "787.373f9978.chunk.js.map": "/notedle/static/js/787.373f9978.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.eff8adf7.js"
+  ]
+}

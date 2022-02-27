@@ -50,8 +50,8 @@ class BasicPiano extends React.Component {
                         width={window.innerWidth * 0.8}
                         playNote={playNote}
                         stopNote={stopNote}
-                        disabled={true}
-                        keyboardShortcuts={keyboardShortcuts}
+                        disabled={isLoading}
+                        //keyboardShortcuts={keyboardShortcuts}
                         keyWidthToHeight={0.8}
                         renderNoteLabel={({ keyboardShortcut, midiNumber, isActive, isAccidental }) => {
                             return (

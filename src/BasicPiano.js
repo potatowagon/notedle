@@ -34,17 +34,20 @@ class BasicPiano extends React.Component {
             lastNote: this.props.noteRange.last,
             keyboardConfig: KeyboardShortcuts.HOME_ROW,
         });
-        const disabledNotes = (this.props.absentNotes.concat(this.props.correctNotes)).filter(midi => midi >= this.props.noteRange.first && midi <= this.props.noteRange.last);
-        console.log(disabledNotes);
+        const inNoteRangeFn = midi => midi >= this.props.noteRange.first && midi <= this.props.noteRange.last;
+        //const absentNotes = (this.props.absentNotes.filter(midi => midi >= this.props.noteRange.first && midi <= this.props.noteRange.last);
         return (
             <SoundfontProvider
                 instrumentName="acoustic_grand_piano"
+                playedNotes={this.playedNotes}
+                setPlayedNotes={this.setPlayedNotes}
                 audioContext={audioContext}
                 hostname={soundfontHostname}
                 render={({ isLoading, playNote, stopNote }) => (
                     <Piano
-                        activeNotes={disabledNotes}
-                        prevActiveNotes={disabledNotes}
+                        absentNotes={this.props.absentNotes.filter(inNoteRangeFn)}
+                        presentNotes={this.props.presentNotes.filter(inNoteRangeFn)}
+                        correctNotes={this.props.correctNotes.filter(inNoteRangeFn)}
                         noteRange={this.props.noteRange}
                         // TODO: make responsive resize for mobile
                         width={window.innerWidth * 0.8}
@@ -60,7 +63,8 @@ class BasicPiano extends React.Component {
                                     <div className="label-midiNumber">{'b'}</div>
                                 </div>
                             );
-                        }}
+                        }
+                        }
                     />
                 )}
                 {...this.props}

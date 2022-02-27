@@ -5,7 +5,7 @@ import { MidiNumbers } from 'react-piano';
 // import SoundfontProvider from './SoundfontProvider';
 import BasicPiano from './BasicPiano';
 import './styles.css';
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 
 // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 // const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
@@ -23,14 +23,28 @@ function App() {
   const [absentNotes, setAbsentNotes] = useState([]);
   const [presentNotes, setPresentNotes] = useState([]);
   const [correctNotes, setCorrectNotes] = useState([]);
+  const [playedNotes, setPlayedNotes] = useState([]);
+
+  const answerNotes = [
+    MidiNumbers.fromNote('c3'),
+    MidiNumbers.fromNote('d3'),
+    MidiNumbers.fromNote('e4'),
+    MidiNumbers.fromNote('f3')
+  ];
+
+  // replace with onclick enter button
+  const onButtonClick = () => {
+    console.log('click');
+    console.log(playedNotes);
+    setPresentNotes(presentNotes.concat(playedNotes.filter((midiNumber) => answerNotes.includes(midiNumber))));
+    setPlayedNotes([]);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <button onClick={onButtonClick} value={'abc'} />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -45,6 +59,8 @@ function App() {
             absentNotes={absentNotes}
             presentNotes={presentNotes}
             correctNotes={correctNotes}
+            playedNotes={playedNotes}
+            setPlayedNotes={setPlayedNotes}
             setAbsentNotes={setAbsentNotes}
             setPresentNotes={setPresentNotes}
             setCorrectNotes={setCorrectNotes}
@@ -54,6 +70,8 @@ function App() {
             absentNotes={absentNotes}
             presentNotes={presentNotes}
             correctNotes={correctNotes}
+            playedNotes={playedNotes}
+            setPlayedNotes={setPlayedNotes}
             setAbsentNotes={setAbsentNotes}
             setPresentNotes={setPresentNotes}
             setCorrectNotes={setCorrectNotes}

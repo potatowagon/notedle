@@ -28,6 +28,12 @@ class BasicPiano extends React.Component {
         };
     }
 
+    calcSize() {
+        const bottleNeck = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+
+
+    }
+
     render() {
         const keyboardShortcuts = KeyboardShortcuts.create({
             firstNote: this.props.noteRange.first,

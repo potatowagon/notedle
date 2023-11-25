@@ -20,8 +20,8 @@ function App() {
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.screen.width,
+        height: window.screen.height,
       });
     };
     // Add event listener
@@ -61,12 +61,39 @@ function App() {
 
   return (
     <div className="flex-container-1" height={windowSize.height}>
-      <button className="flex-container-1-items" onClick={onButtonClick} value={'abc'} />
-      <div className="flex-container-1-items">
-        {windowSize.width},
-        {windowSize.height}
+      <div className="flex-container-1-item flex-container-2">
+        <table className="flex-container-2-item" width={windowSize.width * 0.7}>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+          </tr>
+        </table>
+        <div className="flex-container-2-item flex-container-3">
+          <button className="flex-container-3-item" onClick={onButtonClick} width={windowSize.width * 0.2}>NEW GAME</button>
+          <button className="flex-container-3-item" onClick={onButtonClick} width={windowSize.width * 0.2}>PLAY SOUND</button>
+        </div>
       </div>
-      <div className=".flex-container-1-items">
+      <div className=".flex-container-1-item">
         <BasicPiano
           noteRange={noteRange4}
           absentNotes={absentNotes}
@@ -89,6 +116,14 @@ function App() {
           setPresentNotes={setPresentNotes}
           setCorrectNotes={setCorrectNotes}
         />
+      </div>
+      <div className="flex-container-1-item flex-container-4" flexBasis={windowSize.width * 0.9}>
+        <button className="flex-container-4-item" onClick={onButtonClick} width={windowSize.width * 0.3}>CLEAR</button>
+        <div className="flex-container-4-item">
+          {windowSize.width},
+          {windowSize.height}
+        </div>
+        <button className="flex-container-4-item" onClick={onButtonClick} width={windowSize.width * 0.3}>ENTER</button>
       </div>
     </div>
   );

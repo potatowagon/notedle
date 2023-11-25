@@ -43,6 +43,7 @@ function App() {
   const [presentNotes, setPresentNotes] = useState([]);
   const [correctNotes, setCorrectNotes] = useState([]);
   const [playedNotes, setPlayedNotes] = useState([]);
+  const [isShowFlat, setIsShowFlat] = useState(false);
 
   const answerNotes = [
     MidiNumbers.fromNote('c3'),
@@ -52,11 +53,24 @@ function App() {
   ];
 
   // replace with onclick enter button
-  const onButtonClick = () => {
+  const onEnterButtonClick = () => {
     console.log('click');
     console.log(playedNotes);
     setPresentNotes(presentNotes.concat(playedNotes.filter((midiNumber) => answerNotes.includes(midiNumber))));
     setPlayedNotes([]);
+  };
+
+  const onClearButtonClick = () => {
+    setPlayedNotes([]); // change to backspace one note
+  };
+
+
+  const onNewGameButtonClick = () => {
+    setPlayedNotes([]);
+    setAbsentNotes([]);
+    setCorrectNotes([]);
+    setPresentNotes([]);
+    // rmb to reset answer notes
   };
 
   return (
@@ -89,12 +103,13 @@ function App() {
           </tr>
         </table>
         <div className="flex-container-2-item flex-container-3">
-          <button className="flex-container-3-item" onClick={onButtonClick} width={windowSize.width * 0.2}>NEW GAME</button>
-          <button className="flex-container-3-item" onClick={onButtonClick} width={windowSize.width * 0.2}>PLAY SOUND</button>
+          <button className="flex-container-3-item" onClick={onNewGameButtonClick} width={windowSize.width * 0.2}>NEW GAME</button>
+          <button className="flex-container-3-item" onClick={onEnterButtonClick} width={windowSize.width * 0.2}>PLAY SOUND</button>
         </div>
       </div>
       <div className=".flex-container-1-item">
         <BasicPiano
+          isShowFlat={isShowFlat}
           noteRange={noteRange4}
           absentNotes={absentNotes}
           presentNotes={presentNotes}
@@ -106,6 +121,7 @@ function App() {
           setCorrectNotes={setCorrectNotes}
         />
         <BasicPiano
+          isShowFlat={isShowFlat}
           noteRange={noteRange3}
           absentNotes={absentNotes}
           presentNotes={presentNotes}
@@ -118,12 +134,13 @@ function App() {
         />
       </div>
       <div className="flex-container-1-item flex-container-4" flexBasis={windowSize.width * 0.9}>
-        <button className="flex-container-4-item" onClick={onButtonClick} width={windowSize.width * 0.3}>CLEAR</button>
-        <div className="flex-container-4-item">
+        <button className="flex-container-4-item" onClick={onClearButtonClick} width={windowSize.width * 0.3}>CLEAR</button>
+        {/* <div className="flex-container-4-item">
           {windowSize.width},
           {windowSize.height}
-        </div>
-        <button className="flex-container-4-item" onClick={onButtonClick} width={windowSize.width * 0.3}>ENTER</button>
+        </div> */}
+        <button className="flex-container-4-item" onClick={() => { setIsShowFlat(!isShowFlat) }} width={windowSize.width * 0.3}>b/#?</button>
+        <button className="flex-container-4-item" onClick={onEnterButtonClick} width={windowSize.width * 0.3}>ENTER</button>
       </div>
     </div>
   );

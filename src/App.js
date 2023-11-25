@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import { MidiNumbers } from 'react-piano';
 // import 'react-piano/dist/styles.css';
-// import SoundfontProvider from './SoundfontProvider';
+import SoundfontProvider from './SoundfontProvider';
 import BasicPiano from './BasicPiano';
 import './styles.css';
 import { useState, useEffect } from 'react';
 
-// const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-// const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
 function App() {
 
@@ -75,38 +75,45 @@ function App() {
 
   return (
     <div className="flex-container-1" height={windowSize.height}>
-      <div className="flex-container-1-item flex-container-2">
-        <table className="flex-container-2-item" width={windowSize.width * 0.7}>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-          </tr>
-        </table>
-        <div className="flex-container-2-item flex-container-3">
-          <button className="flex-container-3-item" onClick={onNewGameButtonClick} width={windowSize.width * 0.2}>NEW GAME</button>
-          <button className="flex-container-3-item" onClick={onEnterButtonClick} width={windowSize.width * 0.2}>PLAY SOUND</button>
-        </div>
-      </div>
+      <SoundfontProvider
+        instrumentName="acoustic_grand_piano"
+        audioContext={audioContext}
+        hostname={soundfontHostname}
+        render={({ isLoading, playNote, stopNote, stopAllNotes }) => (
+          <div className="flex-container-1-item flex-container-2">
+            <table className="flex-container-2-item" width={windowSize.width * 0.7}>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+            </table>
+            <div className="flex-container-2-item flex-container-3">
+              <button className="flex-container-3-item" onClick={onNewGameButtonClick} width={windowSize.width * 0.2}>NEW GAME</button>
+              <button className="flex-container-3-item" onClick={() => { answerNotes.map((note, i) => { setTimeout(() => { playNote(note, false); }, 50 * i); }) }} width={windowSize.width * 0.2}>PLAY SOUND</button>
+            </div>
+          </div>
+        )}
+      />
       <div className=".flex-container-1-item">
         <BasicPiano
           isShowFlat={isShowFlat}

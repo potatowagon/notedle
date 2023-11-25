@@ -56,7 +56,7 @@ class SoundfontProvider extends React.Component {
     });
   };
 
-  playNote = midiNumber => {
+  playNote = (midiNumber, isRecord = true) => {
     this.props.audioContext.resume().then(() => {
       const audioNode = this.state.instrument.play(midiNumber);
       this.setState({
@@ -64,8 +64,10 @@ class SoundfontProvider extends React.Component {
           [midiNumber]: audioNode,
         }),
       });
-      this.props.setPlayedNotes(this.props.playedNotes.concat([midiNumber]));
-      console.log("hi");
+      if (isRecord === true) {
+        this.props.setPlayedNotes(this.props.playedNotes.concat([midiNumber]));
+        console.log("hi");
+      }
       // console.log(this.props.correctNotes);
     });
   };

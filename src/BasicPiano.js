@@ -8,7 +8,7 @@ import classNames from 'classnames';
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
-const MIDI_TO_NOTE_FLAT = Object.freeze({
+export const MIDI_TO_NOTE_FLAT = Object.freeze({
     48: 'C3',
     49: 'Db3',
     50: 'D3',
@@ -35,7 +35,7 @@ const MIDI_TO_NOTE_FLAT = Object.freeze({
     71: 'B4',
 });
 
-const MIDI_TO_NOTE_SHARP = Object.freeze({
+export const MIDI_TO_NOTE_SHARP = Object.freeze({
     48: 'C3',
     49: 'C#3',
     50: 'D3',
